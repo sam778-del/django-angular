@@ -1,17 +1,17 @@
 # Prisco Production Deployment with SSL
 
 Complete production-ready Docker deployment with SSL certificates for:
-- **Backend API**: https://fullapi.analist24.it
-- **Frontend**: https://angular.analist24.it
-- **Keycloak**: https://keycloak.analist24.it
+- **Backend API**: https://fullapi.analist24.it.com
+- **Frontend**: https://angular.analist24.it.com
+- **Keycloak**: https://keycloak.analist24.it.com
 
 ## Prerequisites
 
 1. **Domain DNS Records** - Point all domains to your server IP:
    ```
-   A     fullapi.analist24.it    -> YOUR_SERVER_IP
-   A     angular.analist24.it    -> YOUR_SERVER_IP
-   A     keycloak.analist24.it   -> YOUR_SERVER_IP
+   A     fullapi.analist24.it.com    -> YOUR_SERVER_IP
+   A     angular.analist24.it.com    -> YOUR_SERVER_IP
+   A     keycloak.analist24.it.com   -> YOUR_SERVER_IP
    ```
 
 2. **Server Requirements**:
@@ -94,19 +94,19 @@ docker-compose up -d
 
 ### 5. Configure Keycloak
 
-1. Access Keycloak Admin Console: https://keycloak.analist24.it/admin
+1. Access Keycloak Admin Console: https://keycloak.analist24.it.com/admin
 2. Login with credentials from `.env` (KEYCLOAK_ADMIN_USERNAME/PASSWORD)
 3. Create realm: `web-realm`
 4. Create backend client:
    - Client ID: `django-backend`
    - Client authentication: ON
-   - Valid redirect URIs: `https://fullapi.analist24.it/*`
-   - Web origins: `https://fullapi.analist24.it`
+   - Valid redirect URIs: `https://fullapi.analist24.it.com/*`
+   - Web origins: `https://fullapi.analist24.it.com`
 5. Create frontend client:
    - Client ID: `angular-frontend`
    - Client authentication: OFF
-   - Valid redirect URIs: `https://angular.analist24.it/*`
-   - Web origins: `https://angular.analist24.it`
+   - Valid redirect URIs: `https://angular.analist24.it.com/*`
+   - Web origins: `https://angular.analist24.it.com`
 6. Get public key:
    - Realm Settings → Keys → RS256 → Public key
    - Add to `.env` as `KEYCLOAK_PUBLIC_KEY`
@@ -124,11 +124,11 @@ docker-compose up -d
 
 ## Service URLs
 
-- **Frontend**: https://angular.analist24.it
-- **Backend API**: https://fullapi.analist24.it/api
-- **Backend Admin**: https://fullapi.analist24.it/admin
-- **Keycloak**: https://keycloak.analist24.it
-- **API Docs**: https://fullapi.analist24.it/api/schema/swagger-ui/
+- **Frontend**: https://angular.analist24.it.com
+- **Backend API**: https://fullapi.analist24.it.com/api
+- **Backend Admin**: https://fullapi.analist24.it.com/admin
+- **Keycloak**: https://keycloak.analist24.it.com
+- **API Docs**: https://fullapi.analist24.it.com/api/schema/swagger-ui/
 
 ## SSL Certificate Management
 
@@ -216,9 +216,9 @@ docker-compose exec backend python manage.py createsuperuser
 **Problem**: Certificate request fails
 ```bash
 # Check DNS propagation
-dig fullapi.analist24.it
-dig angular.analist24.it
-dig keycloak.analist24.it
+dig fullapi.analist24.it.com
+dig angular.analist24.it.com
+dig keycloak.analist24.it.com
 
 # Test with staging (remove --staging flag when working)
 # Edit init-letsencrypt.sh, set staging=1
@@ -249,7 +249,7 @@ docker-compose exec backend ping keycloak
 **Problem**: Frontend can't access backend
 ```bash
 # Check CORS settings in .env
-CORS_ALLOWED_ORIGINS=https://angular.analist24.it
+CORS_ALLOWED_ORIGINS=https://angular.analist24.it.com
 
 # Restart backend
 docker-compose restart backend

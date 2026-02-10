@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains=(fullapi.analist24.it angular.analist24.it keycloak.analist24.it)
+domains=(fullapi.analist24.it.com angular.analist24.it.com keycloak.analist24.it.com)
 rsa_key_size=4096
 data_path="./certbot"
 email="admin@analist24.it"
